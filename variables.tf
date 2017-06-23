@@ -2,6 +2,25 @@ variable "subscription_id" {}
 variable "client_id" {}
 variable "client_secret" {}
 variable "tenant_id" {}
+variable "vnet" {
+   type = "string"
+   description = "Enter the name of the VNET if not exist it will create new resource"
+}
+
+variable "address_space" {
+   type = "map"
+   description = "Select the vnet to insert the address_space"
+   default = {
+    "NRHL-WestUS-1"= "10.242.0.0/22"
+}
+
+}
+
+/*
+variable "vnet_address_space" {
+    type = "list" 
+     }
+*/
 
 
 variable "subnet" {
@@ -57,7 +76,7 @@ variable "admin_password" {
 
 }
 
-variable "subnet_resource_group_name" {
+variable "vnet_resource_group_name" {
     type = "string"
     description = " Please enter the name of resource group (EnterpriseApps-Platform-PoC, EnterpriseApps-Network, EnterpriseApps-Platform, EnterpriseApps-GP-QA, EnterpriseApps-GP-Prod, EnterpriseApps-GP-NonProd),Changing this forces a new resource to be created"
 }
