@@ -8,18 +8,25 @@ provider "azurerm" {
   tenant_id       = "${var.tenant_id}"  
 }
 
+resource "azurerm_virtual_network" "virtualnetwork" {
+  name                = "${var.vnet}"
+  resource_group_name = "${var.vnet_resource_group_name}"
+  address_space       = ["${lookup(var.address_space, var.vnet)}"]
+#  address_space       = "${var.vnet_address_space}"
+  location            = "${var.location}"
+ }
 
 resource "azurerm_subnet" "subnet" {
   name                 = "${var.subnet}"
-  resource_group_name  = "${var.subnet_resource_group_name}"
-  virtual_network_name = "NRHL-WestUS-1"
+  resource_group_name  = "${azurerm_virtual_network.virtualnetwork.resource_group_name}"
+  virtual_network_name = "${azurerm_virtual_network.virtualnetwork.name}"
   address_prefix       = "${lookup(var.address_prefix, var.subnet)}"
 }
  
 resource "azurerm_network_interface" "packernic" {
   name                = "ipconfig1"
   location            = "${var.location}"
-  resource_group_name = "${azurerm_subnet.subnet.resource_group_name}"
+  resource_group_name = "${azurerm_virtual_network.virtualnetwork.resource_group_name}"
 
     ip_configuration {
       name                          = "ipconfig"
