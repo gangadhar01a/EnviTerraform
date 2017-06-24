@@ -1,7 +1,0 @@
-subscription_id = "2349456e-4c6c-445f-aabb-676a6dfa239f"
-client_id       = "e79c9b69-aa6f-4ade-894c-17ab70dcea65"
-client_secret   = "krIW9tRpLiJrZLSy6hyZqF5OoiRVq+2Hdzybihng80g="
-tenant_id       = "2727110d-07ee-4a4a-98a8-f29ad87d46ab"
-QA              = "10.242.1.0/24"
-Development     = "10.242.0.128/25"
-Staging         = "10.242.2.0/25"
